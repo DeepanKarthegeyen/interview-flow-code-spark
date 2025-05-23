@@ -32,25 +32,40 @@ export const TopBar = ({ candidateInfo, elapsedTime, codingStarted }: TopBarProp
             </h1>
             <p className="text-sm text-gray-600">{candidateInfo.email}</p>
           </div>
-          
+        </div>
+
+        <div className="flex items-center space-x-4">
+          {/* Time display section */}
           <div className="flex items-center space-x-2 bg-gray-50 px-4 py-2 rounded-lg">
             <Clock className="w-4 h-4 text-blue-600" />
             <span className="text-sm font-medium text-gray-700">
-              {codingStarted ? 'Time Remaining:' : 'Time Elapsed:'} 
+              Time Elapsed: 
               <span className="ml-2 text-blue-600 font-mono">
-                {codingStarted ? getRemainingTime() : formatTime(elapsedTime)}
+                {formatTime(elapsedTime)}
               </span>
             </span>
           </div>
+          
+          {codingStarted && (
+            <div className="flex items-center space-x-2 bg-gray-50 px-4 py-2 rounded-lg">
+              <Clock className="w-4 h-4 text-red-600" />
+              <span className="text-sm font-medium text-gray-700">
+                Time Remaining: 
+                <span className="ml-2 text-red-600 font-mono">
+                  {getRemainingTime()}
+                </span>
+              </span>
+            </div>
+          )}
+          
+          <Button 
+            variant="destructive" 
+            className="bg-red-600 hover:bg-red-700"
+          >
+            <Phone className="w-4 h-4 mr-2" />
+            End Call
+          </Button>
         </div>
-        
-        <Button 
-          variant="destructive" 
-          className="bg-red-600 hover:bg-red-700"
-        >
-          <Phone className="w-4 h-4 mr-2" />
-          End Call
-        </Button>
       </div>
     </div>
   );
