@@ -1,14 +1,22 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState, useEffect } from 'react';
+import { LoginForm } from '../components/LoginForm';
+import { InterviewDashboard } from '../components/InterviewDashboard';
 
 const Index = () => {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
-    </div>
-  );
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [candidateInfo, setCandidateInfo] = useState<{name: string, email: string} | null>(null);
+
+  const handleLogin = (name: string, email: string) => {
+    setCandidateInfo({ name, email });
+    setIsLoggedIn(true);
+  };
+
+  if (!isLoggedIn) {
+    return <LoginForm onLogin={handleLogin} />;
+  }
+
+  return <InterviewDashboard candidateInfo={candidateInfo!} />;
 };
 
 export default Index;
