@@ -26,26 +26,29 @@ export const TopBar = ({ candidateInfo, elapsedTime, codingStarted }: TopBarProp
     <div className="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-6">
-          <div>
-            <h1 className="text-xl font-semibold text-gray-900">
-              Hello, {candidateInfo.name}
-            </h1>
-            <p className="text-sm text-gray-600">{candidateInfo.email}</p>
+          <div className="flex items-center space-x-4">
+            <div>
+              <h1 className="text-xl font-semibold text-gray-900">
+                Hello, {candidateInfo.name}
+              </h1>
+              <p className="text-sm text-gray-600">{candidateInfo.email}</p>
+            </div>
+            
+            {/* Time Elapsed - Positioned near candidate name */}
+            <div className="flex items-center space-x-2 bg-gray-50 px-4 py-2 rounded-lg">
+              <Clock className="w-4 h-4 text-blue-600" />
+              <span className="text-sm font-medium text-gray-700">
+                Time Elapsed: 
+                <span className="ml-2 text-blue-600 font-mono">
+                  {formatTime(elapsedTime)}
+                </span>
+              </span>
+            </div>
           </div>
         </div>
 
         <div className="flex items-center space-x-4">
-          {/* Time display section */}
-          <div className="flex items-center space-x-2 bg-gray-50 px-4 py-2 rounded-lg">
-            <Clock className="w-4 h-4 text-blue-600" />
-            <span className="text-sm font-medium text-gray-700">
-              Time Elapsed: 
-              <span className="ml-2 text-blue-600 font-mono">
-                {formatTime(elapsedTime)}
-              </span>
-            </span>
-          </div>
-          
+          {/* Time Remaining - Only shown when coding started and positioned near End Call button */}
           {codingStarted && (
             <div className="flex items-center space-x-2 bg-gray-50 px-4 py-2 rounded-lg">
               <Clock className="w-4 h-4 text-red-600" />
